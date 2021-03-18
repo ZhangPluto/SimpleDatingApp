@@ -1,8 +1,8 @@
 # SimpleDatingApp
-## This is a really simple dating application
-## For Android final project
-## Will use firebase.
-
+- This is a really simple dating application
+- For Android final project
+- Will use firebase.
+***
 # GitHub Rules 
 # Attention!! Any submissions that do not follow the rules will be deleted!!
 - Each programmer should fork this repository to their own GitHub, rather than committing code in this repository (the main repository or the upstream repository), any code committed directly in that repository **will be deleted**
