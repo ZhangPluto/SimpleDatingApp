@@ -51,7 +51,7 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (!task.isSuccessful()){
-                            Toast.makeText(LoginActivity.this, "sign in error", Toast.LENGTH_LONG).show();
+                            Toast.makeText(LoginActivity.this, "sign in error", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
