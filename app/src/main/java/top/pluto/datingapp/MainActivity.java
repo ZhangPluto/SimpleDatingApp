@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private int i;
     private FirebaseAuth mAuth;
     private Button mSignout;
+    private Button mSettings;
     private String currentUId;
     private DatabaseReference usersDb;
     ListView listView;
@@ -239,12 +240,21 @@ public class MainActivity extends AppCompatActivity {
                 mAuth.signOut();
                 Intent intent = new Intent(MainActivity.this, ChooseLoginRegistrationActivity.class);
                 startActivity(intent);
-                finish();
-                return;
             }
         });
 
     }
 
 
+    public void settings(View view) {
+        mSettings = (Button) findViewById(R.id.settings);
+        mSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+                intent.putExtra("userSex",userSex);
+                startActivity(intent);
+            }
+        });
+    }
 }
