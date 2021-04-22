@@ -140,8 +140,8 @@ public class SettingsActivity extends AppCompatActivity {
                 public void onFailure(@NonNull Exception e) {
                     finish();
                 }
-            });
-            uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            })
+            .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     Task<Uri> downloadUrl = filepath.getDownloadUrl();

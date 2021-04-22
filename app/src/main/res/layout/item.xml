@@ -21,25 +21,30 @@
 
         android:id="@+id/cardView"
         >
-        <FrameLayout
+        <LinearLayout
             android:layout_gravity="center"
-            android:layout_width="250dp"
-            android:layout_height="170dp">
+            android:layout_width="300dp"
+            android:layout_height="350dp"
+            android:orientation="vertical">
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/image"
+                    android:scaleType="centerCrop"/>
+<!--                    android:layout_height="300dp"-->
 
-                    />
+
                 <TextView
                     android:id="@+id/name"
-                    android:textSize="40sp"
+                    android:textSize="30dp"
+                    android:paddingLeft="20sp"
+                    android:background="@android:color/holo_blue_dark"
                     android:textColor="@android:color/black"
-                    android:gravity="center"
+                    android:gravity="center|left"
                     tools:text="Hello"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
-        </FrameLayout>
+        </LinearLayout>
 
 
     </androidx.cardview.widget.CardView>
