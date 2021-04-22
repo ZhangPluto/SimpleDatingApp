@@ -25,19 +25,16 @@ import com.lorentzos.flingswipe.SwipeFlingAdapterView;
 import java.util.ArrayList;
 import java.util.List;
 
-import top.pluto.datingapp.Cards.arrayAdapter;
-import top.pluto.datingapp.Cards.cards;
 
 public class MainActivity extends AppCompatActivity {
 
     private cards cards_data[];
-    private top.pluto.datingapp.Cards.arrayAdapter arrayAdapter;
+    private arrayAdapter arrayAdapter;
     private int i;
     private FirebaseAuth mAuth;
     private Button mSignout;
     private String currentUId;
-    public DatabaseReference usersDb;
-
+    private DatabaseReference usersDb;
     ListView listView;
     List<cards> rowItems;
 
@@ -51,12 +48,10 @@ public class MainActivity extends AppCompatActivity {
         currentUId = mAuth.getCurrentUser().getUid();
 
         checkUserSex();
+
+
         rowItems = new ArrayList<cards>();
-
-
         arrayAdapter = new arrayAdapter(this, R.layout.item, rowItems);
-
-
         SwipeFlingAdapterView flingContainer = (SwipeFlingAdapterView) findViewById(R.id.frame);
 
         flingContainer.setAdapter(arrayAdapter);
@@ -131,19 +126,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void getOppositeSexUsers() {
-        usersDb.addChildEventListener(new ChildEventListener() {
+        DatabaseReference oppositeSexDb = FirebaseDatabase.getInstance().getReference().child("Users").child(oppositeUserSex);
+        oppositeSexDb.addChildEventListener(new ChildEventListener() {
             @Override
-            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String s) {
-                if (dataSnapshot.child("sex").getValue() != null) {
-                    if (dataSnapshot.exists() && !dataSnapshot.child("connections").child("nope").hasChild(currentUId) && !dataSnapshot.child("connections").child("yeps").hasChild(currentUId) && dataSnapshot.child("sex").getValue().toString().equals(oppositeUserSex)) {
-                        String profileImageUrl = "default";
-                        if (!dataSnapshot.child("profileImageUrl").getValue().equals("default")) {
-                            profileImageUrl = dataSnapshot.child("profileImageUrl").getValue().toString();
-                        }
-                        cards item = new cards(dataSnapshot.getKey(), dataSnapshot.child("name").getValue().toString(), profileImageUrl);
-                        rowItems.add(item);
-                        arrayAdapter.notifyDataSetChanged();
-                    }
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+                if (snapshot.exists()) {
+                    cards item = new cards(snapshot.getKey(),snapshot.child("name").getValue().toString());
+                    rowItems.add(item);
+                    arrayAdapter.notifyDataSetChanged();
                 }
             }
 
