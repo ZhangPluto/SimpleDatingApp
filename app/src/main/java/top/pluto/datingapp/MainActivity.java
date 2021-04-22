@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private int i;
     private FirebaseAuth mAuth;
     private Button mSignout;
+    private Button mSettings;
     private String currentUId;
     private DatabaseReference usersDb;
     ListView listView;
@@ -199,7 +200,6 @@ public class MainActivity extends AppCompatActivity {
         oppositeSexDb.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
                 if (snapshot.exists() && !snapshot.child("connections").child("nope").hasChild(currentUId) && !snapshot.child("connections").child("yeps").hasChild(currentUId)) {
                     cards item = new cards(snapshot.getKey(),snapshot.child("name").getValue().toString());
                     rowItems.add(item);
@@ -239,12 +239,21 @@ public class MainActivity extends AppCompatActivity {
                 mAuth.signOut();
                 Intent intent = new Intent(MainActivity.this, ChooseLoginRegistrationActivity.class);
                 startActivity(intent);
-                finish();
-                return;
             }
         });
 
     }
 
 
+    public void settings(View view) {
+        mSettings = (Button) findViewById(R.id.settings);
+        mSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+                intent.putExtra("userSex",userSex);
+                startActivity(intent);
+            }
+        });
+    }
 }
